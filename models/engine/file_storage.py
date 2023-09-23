@@ -8,7 +8,6 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-import shlex
 
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
@@ -37,20 +36,12 @@ class FileStorage:
 
     def delete(self, obj=None):
         """Deletes an object from storage"""
-        if (obj and f"{obj.__class__.__name__}.{obj.id}" in self.all().keys()):
+        if (obj and f"{obj.__class__.__name__}.{obj.id}" in self.all()):
             k = f"{obj.__class__.__name__}.{obj.id}"
             self.all().pop(k)            
         
     def reload(self):
         """Loads storage dictionary from file"""
-        from models.base_model import BaseModel
-        from models.user import User
-        from models.place import Place
-        from models.state import State
-        from models.city import City
-        from models.amenity import Amenity
-        from models.review import Review
-
         classes = {
                     'BaseModel': BaseModel, 'User': User, 'Place': Place,
                     'State': State, 'City': City, 'Amenity': Amenity,
