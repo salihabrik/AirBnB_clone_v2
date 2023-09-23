@@ -16,10 +16,14 @@ class FileStorage:
 
     def all(self, cls=None):
         """Returns a dictionary of instances of a class currently in storage"""
-        if (cls):
-            return {k: v for k,v in FileStorage.__objects.items() 
-                    if type(v) == cls}
-        return FileStorage.__objects
+        if cls:
+            dictionary = {}
+            for k, v in self.__objects.items():
+                if cls == v.__class__ or cls == v.__class__.__name__:
+                    dictionary[k] = v
+            return dictionary
+        return self.__objects
+
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
