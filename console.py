@@ -140,7 +140,6 @@ class HBNBCommand(cmd.Cmd):
             return
 
         new_instance = eval(arg[0])()
-        print(arg[0])
         arg.pop(0)
         for item in arg:
             item = item.split('=')
