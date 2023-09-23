@@ -3,7 +3,7 @@
 
 from os import getenv
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import (create_engine)
+from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from models.base_model import Base
 from models.state import State
@@ -22,14 +22,14 @@ class DBStorage():
 
     def __init__(self):
         """Initializing the values and linking the db"""
-        user = getenv("HBNB_MYSQL_USER")
+        usr = getenv("HBNB_MYSQL_USER")
         password = getenv("HBNB_MYSQL_PWD")
         host = getenv("HBNB_MYSQL_HOST")
         db = getenv("HBNB_MYSQL_DB")
         env = getenv("HBNB_ENV")
 
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
-                                      .format(user, password, host, db),
+                                      .format(usr, password, host, db),
                                       pool_pre_ping=True)
         if env == 'test':
             Base.metadata.drop_all(self.__engine)
