@@ -2,8 +2,8 @@
 """New Database Engine"""
 
 from os import getenv
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy import (create_engine)
 from sqlalchemy.ext.declarative import declarative_base
 from models.base_model import Base
 from models.state import State
@@ -12,24 +12,23 @@ from models.user import User
 from models.place import Place
 from models.review import Review
 from models.amenity import Amenity
-from sqlalchemy.orm import scoped_session
 
 
 class DBStorage():
-    """represente a file storage"""
+    """file storage"""
     __engine = None
     __session = None
 
     def __init__(self):
         """Initializing the values and linking the db"""
-        usr = getenv("HBNB_MYSQL_USER")
+        user = getenv("HBNB_MYSQL_USER")
         password = getenv("HBNB_MYSQL_PWD")
         host = getenv("HBNB_MYSQL_HOST")
         db = getenv("HBNB_MYSQL_DB")
         env = getenv("HBNB_ENV")
 
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
-                                      .format(usr, password, host, db),
+                                      .format(user, password, host, db),
                                       pool_pre_ping=True)
         if env == 'test':
             Base.metadata.drop_all(self.__engine)
