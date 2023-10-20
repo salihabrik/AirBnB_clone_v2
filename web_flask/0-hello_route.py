@@ -10,7 +10,7 @@ app = Flask(__name__)
 def hello_hbnb():
     """
     Routing to root, strict_slashes ensure
-    the URL works when it ends both with or without the /
+    the URL works it ends both with or without the /
     """
     return "Hello HBNB!"
 
